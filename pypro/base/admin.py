@@ -69,7 +69,7 @@ class UserAdmin(admin.ModelAdmin):
         return [
                    path(
                        '<id>/password/',
-                       self.admin_site.admin_view(self.user_change_password),name='auth_user_password_change'
+                       self.admin_site.admin_view(self.user_change_password), name='auth_user_password_change'
                    ),
                ] + super().get_urls()
 
@@ -131,8 +131,8 @@ class UserAdmin(admin.ModelAdmin):
                 update_session_auth_hash(request, form.user)
                 return HttpResponseRedirect(
                     reverse(
-                        '%s:%s_%s_change' % (self.admin_site.name,user._meta.app_label,user._meta.model_name,)
-                        ,args=(user.pk,),
+                        '%s:%s_%s_change' % (self.admin_site.name, user._meta.app_label, user._meta.model_name),
+                        args=(user.pk,)
                     )
                 )
         else:
