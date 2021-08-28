@@ -31,7 +31,8 @@ class UserAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('first_name', 'email', 'password')}),
         (_('Permissions'), {
-            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
+            'fields': ('is_active', 'is_staff', 'is_superuser'
+                       , 'groups', 'user_permissions'),
         }),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
@@ -76,8 +77,7 @@ class UserAdmin(admin.ModelAdmin):
 
     def lookup_allowed(self, lookup, value):
         # Don't allow lookups involving passwords.
-        return not lookup.startswith('password') and \
-               super().lookup_allowed(lookup, value)
+        return not lookup.startswith('password') and super().lookup_allowed(lookup, value)
 
     @sensitive_post_parameters_m
     @csrf_protect_m
@@ -118,8 +118,7 @@ class UserAdmin(admin.ModelAdmin):
         if not self.has_change_permission(request, user):
             raise PermissionDenied
         if user is None:
-            raise Http404(_('%(name)s object with primary '
-                            'key %(key)r does not exist.') % {
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {
                 'name': self.model._meta.verbose_name,
                 'key': escape(id),
             })
@@ -127,7 +126,8 @@ class UserAdmin(admin.ModelAdmin):
             form = self.change_password_form(user, request.POST)
             if form.is_valid():
                 form.save()
-                change_message = self.construct_change_message(request, form, None)
+                change_message = \
+                    self.construct_change_message(request, form, None)
                 self.log_change(request, user, change_message)
                 msg = gettext('Password changed successfully.')
                 messages.success(request, msg)
@@ -187,7 +187,8 @@ class UserAdmin(admin.ModelAdmin):
         # button except in two scenarios:
         # * The user has pressed the 'Save and add another' button
         # * We are adding a user in a popup
-        if '_addanother' not in request.POST and IS_POPUP_VAR not in request.POST:
+        if '_addanother' not in request.POST and\
+                IS_POPUP_VAR not in request.POST:
             request.POST = request.POST.copy()
             request.POST['_continue'] = 1
         return super().response_add(request, obj, post_url_continue)
