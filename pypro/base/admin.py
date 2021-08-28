@@ -69,15 +69,13 @@ class UserAdmin(admin.ModelAdmin):
         return [
                    path(
                        '<id>/password/',
-                       self.admin_site.admin_view(self.user_change_password),
-                       name='auth_user_password_change',
+                       self.admin_site.admin_view(self.user_change_password),name='auth_user_password_change'
                    ),
                ] + super().get_urls()
 
     def lookup_allowed(self, lookup, value):
         # Don't allow lookups involving passwords.
-        return not lookup.startswith('password') and \
-               super().lookup_allowed(lookup, value)
+        return not lookup.startswith('password') and super().lookup_allowed(lookup, value)
 
     @sensitive_post_parameters_m
     @csrf_protect_m
@@ -118,8 +116,7 @@ class UserAdmin(admin.ModelAdmin):
         if not self.has_change_permission(request, user):
             raise PermissionDenied
         if user is None:
-            raise Http404(_('%(name)s object with primary '
-                            'key %(key)r does not exist.') % {
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {
                 'name': self.model._meta.verbose_name,
                 'key': escape(id),
             })
@@ -134,12 +131,8 @@ class UserAdmin(admin.ModelAdmin):
                 update_session_auth_hash(request, form.user)
                 return HttpResponseRedirect(
                     reverse(
-                        '%s:%s_%s_change' % (
-                            self.admin_site.name,
-                            user._meta.app_label,
-                            user._meta.model_name,
-                        ),
-                        args=(user.pk,),
+                        '%s:%s_%s_change' % (self.admin_site.name,user._meta.app_label,user._meta.model_name,)
+                        ,args=(user.pk,),
                     )
                 )
         else:
