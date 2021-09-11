@@ -12,8 +12,10 @@ def resp(client):
 def test_status_code(resp):
     assert resp.status_code == 200
 
+
 def test_titulo_video(resp):
     assert_contains(resp, '<h1>Video aperitivo : Motivação</h1>')
+
 
 def test_conteudo_video(resp):
     assert_contains(resp, 'src="https://player.vimeo.com/video/602764344?h=963b6c3f44"')
