@@ -20,6 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pypro.base.urls')),
+    path('aperitivo/', include('pypro.aperitivo.urls')),
 ]
 
 if settings.DEBUG:
