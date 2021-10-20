@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pypro.base.urls')),
     path('aperitivo/', include('pypro.aperitivo.urls')),
+    path('modulos/', include('pypro.modulos.urls')),
 ]
 
 if settings.DEBUG:
