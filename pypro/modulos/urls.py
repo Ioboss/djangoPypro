@@ -1,6 +1,5 @@
 from django.urls import path
 
-from pypro.aperitivo.views import video, indice
 from pypro.modulos import views
 
 app_name = 'modulos'

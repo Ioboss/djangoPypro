@@ -3,7 +3,7 @@ from typing import List
 from pypro.modulos.models import Modulo, Aula
 
 
-def listar_modulos_ordenados()-> List[Modulo]:
+def listar_modulos_ordenados() -> List[Modulo]:
     """
     Lista modulos ordenados por titulos
     :Returns:
@@ -11,7 +11,7 @@ def listar_modulos_ordenados()-> List[Modulo]:
     return list(Modulo.objects.order_by('order').all())
 
 
-def encontrar_modulo(slug:str) -> Modulo:
+def encontrar_modulo(slug: str) -> Modulo:
     return Modulo.objects.get(slug=slug)
 
 
@@ -20,4 +20,4 @@ def listar_aulas_de_modulo_ordenados(modulo):
 
 
 def encontrar_aula(slug):
-    return Aula.objects.get(slug=slug)
+    return Aula.objects.select_related('modulo').get(slug=slug)
