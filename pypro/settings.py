@@ -40,6 +40,7 @@ LOGOUT_REDIRECT_URL = '/'
 INSTALLED_APPS = [
     'pypro.base',
     'pypro.aperitivo',
+    'pypro.turmas',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pypro.modulos',
     'ordered_model',
+
 
 ]
 
