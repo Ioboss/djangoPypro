@@ -24,7 +24,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
+     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             </li>
@@ -45,7 +45,25 @@
             </li>
 
         </ul>
+        {% if user.is_authenticated %}
+             <ul class="navbar-nav">
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    {{ user.first_name }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
+                    <button type="button" class="dropdown-item">Sair</button>
+
+                </ul>
+            </li>
+
+        </ul>
+        {% else %}
+        <a  class="btn btn-light me-2" href="{% url 'login' %}">Entrar</a>
+        {% endif %}
     </div>
     </div>
 </nav>
