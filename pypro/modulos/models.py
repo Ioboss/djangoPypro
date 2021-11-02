@@ -9,7 +9,6 @@ class Modulo(OrderedModel):
     descricao = models.TextField()
     slug = models.SlugField(unique=True)
 
-
     class Meta(OrderedModel.Meta):
         pass
 
