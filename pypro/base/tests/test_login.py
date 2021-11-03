@@ -53,16 +53,20 @@ def resp_home_com_usuario_logado(client_com_usuario_logado, db):
 
 
 def test_botao_entrar_indisponivel(resp_home_com_usuario_logado):
-    assert_not_contains(resp_home, 'Entrar')
+    assert_not_contains(resp_home_com_usuario_logado, 'Entrar')
 
 
 def test_link_login_indisponivel(resp_home_com_usuario_logado):
-    assert_not_contains(resp_home, reverse('login'))
+    assert_not_contains(resp_home_com_usuario_logado, reverse('login'))
 
 
 def test_botao_sair_disponivel(resp_home_com_usuario_logado):
-    assert_contains(resp_home, 'Sair')
+    assert_contains(resp_home_com_usuario_logado, 'Sair')
 
 
 def test_nome_usuario_logado_disponivel(resp_home_com_usuario_logado, usuario_logado):
-    assert_contains(resp_home, usuario_logado.first_name)
+    assert_contains(resp_home_com_usuario_logado, usuario_logado.first_name)
+
+
+def test_link_logout_disponivel(resp_home_com_usuario_logado):
+    assert_contains(resp_home_com_usuario_logado, reverse('logout'))
